@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - Enemy
+  - HealthPickup
   layers:
   - Default
   - TransparentFX

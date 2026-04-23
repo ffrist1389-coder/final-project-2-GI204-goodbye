@@ -6,6 +6,12 @@ public class ShipController : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 200f;
 
+    [Header("Map Bounds")]
+    public float minX = -30f;
+    public float maxX = 30f;
+    public float minY = -20f;
+    public float maxY = 20f;
+
     [Header("Shooting")]
     public GameObject bulletPrefab;
     public Transform firePointL;
@@ -41,6 +47,16 @@ public class ShipController : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+
+        pos.x = Mathf.Clamp(pos.x, minX, maxX);
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+        transform.position = pos;
+    }
+
     void Shoot()
     {
         if (bulletPrefab == null || firePointL == null || firePointR == null)
@@ -49,7 +65,6 @@ public class ShipController : MonoBehaviour
             return;
         }
 
-        // ยิงออก 2 ข้าง
         Instantiate(bulletPrefab, firePointL.position, firePointL.rotation);
         Instantiate(bulletPrefab, firePointR.position, firePointR.rotation);
     }

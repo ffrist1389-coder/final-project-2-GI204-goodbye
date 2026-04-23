@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    public int maxHP = 5;
+    public int maxHP = 10;
     public int currentHP;
 
     public HealthBar healthBar;
@@ -10,18 +10,56 @@ public class PlayerHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
-        healthBar.SetMaxHealth(maxHP);
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHP);
+            healthBar.SetHealth(currentHP);
+        }
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int damage)
     {
-        currentHP -= dmg;
+        currentHP -= damage;
 
-        healthBar.SetHealth(currentHP);
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHP);
+        }
 
         if (currentHP <= 0)
         {
-            GameManager.instance.GameOver();
+            Die();
         }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHP);
+        }
+    }
+
+    void Die()
+    {
+        if (GameStateManager.instance != null)
+        {
+            GameStateManager.instance.GameOver(transform.position);
+        }
+
+        gameObject.SetActive(false);
     }
 }

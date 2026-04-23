@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float speed = 8f;
+    public float speed = 12f;
 
     void Update()
     {
@@ -19,7 +19,7 @@ public class EnemyBullet : MonoBehaviour
 
             if (hp != null)
             {
-                hp.TakeDamage(1);
+                hp.TakeDamage(13);
             }
 
             Destroy(gameObject);

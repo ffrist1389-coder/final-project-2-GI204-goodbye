@@ -6,11 +6,20 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public int score = 0;
+    public int winScore = 30;
     public TextMeshProUGUI scoreText;
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     void Start()
@@ -22,10 +31,21 @@ public class ScoreManager : MonoBehaviour
     {
         score += amount;
         UpdateUI();
+
+        if (score >= winScore)
+        {
+            if (GameStateManager.instance != null)
+            {
+                GameStateManager.instance.WinGame();
+            }
+        }
     }
 
     void UpdateUI()
     {
-        scoreText.text = "Score: " + score;
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
     }
 }

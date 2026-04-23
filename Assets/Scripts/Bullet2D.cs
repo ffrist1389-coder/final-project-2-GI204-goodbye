@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class Bullet2D : MonoBehaviour
 {
-    public float speed = 15f;
+    public float speed = 30f;
     public float lifeTime = 3f;
 
     void Start()
     {
-        // ลบตัวเองหลัง 3 วิ (กันรก)
         Destroy(gameObject, lifeTime);
     }
 
     void Update()
     {
-        // เคลื่อนที่ไปข้างหน้า (แกน Y)
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        transform.position += transform.up * speed * Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D other)

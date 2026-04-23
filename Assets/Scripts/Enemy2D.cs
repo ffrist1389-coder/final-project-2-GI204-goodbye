@@ -9,14 +9,17 @@ public class Enemy2D : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+        }
     }
 
     void Update()
     {
         if (player != null)
         {
-            // วิ่งเข้าหาผู้เล่น
             Vector2 direction = (player.position - transform.position).normalized;
             transform.Translate(direction * speed * Time.deltaTime);
         }
@@ -25,10 +28,17 @@ public class Enemy2D : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
+        Debug.Log("Enemy HP = " + hp);
 
         if (hp <= 0)
         {
-            ScoreManager.instance.AddScore(1);
+            EnemyScore score = GetComponent<EnemyScore>();
+
+            if (score != null && ScoreManager.instance != null)
+            {
+                ScoreManager.instance.AddScore(score.scoreValue);
+            }
+
             Destroy(gameObject);
         }
     }

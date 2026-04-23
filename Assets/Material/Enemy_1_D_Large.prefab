@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4598528577479286342}
   - component: {fileID: 6383264099726908850}
   - component: {fileID: -7922438115437829302}
+  - component: {fileID: -6434432075349697423}
+  - component: {fileID: 2240584246850935270}
   m_Layer: 0
   m_Name: Enemy_1_D_Large
   m_TagString: Enemy
@@ -180,5 +182,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter2D
   speed: 2
-  bulletPrefab: {fileID: 0}
-  fireRate: 1
+  bulletPrefab: {fileID: 2109442044304664433, guid: c3f5e5d1a7fe82a479c96ad1b5b835b6, type: 3}
+--- !u!114 &-6434432075349697423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227445559605019229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512685151a0f9fc41a96ac725c673255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy2D
+  hp: 40
+  speed: 3
+--- !u!114 &2240584246850935270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227445559605019229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fefde905b15614409b757d9d16fd0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyScore
+  scoreValue: 30

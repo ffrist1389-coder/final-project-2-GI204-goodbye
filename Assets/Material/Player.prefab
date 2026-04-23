@@ -4916,7 +4916,7 @@ GameObject:
   - component: {fileID: 2798798224691412804}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5073,10 +5073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8248316744e6f4abf8bbc9290b63a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipController
-  acceleration: 50
+  moveSpeed: 5
   rotationSpeed: 250
-  maxSpeed: 30
-  thrustParticles: {fileID: 8192628638247482247}
+  bulletPrefab: {fileID: 0}
+  firePointL: {fileID: 0}
+  firePointR: {fileID: 0}
+  fireRate: 0.2
 --- !u!114 &8275682469236753309
 MonoBehaviour:
   m_ObjectHideFlags: 0
