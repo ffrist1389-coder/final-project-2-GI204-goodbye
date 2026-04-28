@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
+    [Header("Health")]
     public int maxHP = 10;
     public int currentHP;
 
+    [Header("UI")]
     public HealthBar healthBar;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+    public AudioClip explosionSound;
+
+    private bool isDead = false;
 
     void Start()
     {
         currentHP = maxHP;
+        isDead = false;
 
         if (healthBar != null)
         {
@@ -20,6 +30,8 @@ public class PlayerHP : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHP -= damage;
 
         if (currentHP < 0)
@@ -32,6 +44,12 @@ public class PlayerHP : MonoBehaviour
             healthBar.SetHealth(currentHP);
         }
 
+        // เสียงตอนโดนยิง
+        if (audioSource != null && hitSound != null)
+        {
+            audioSource.PlayOneShot(hitSound);
+        }
+
         if (currentHP <= 0)
         {
             Die();
@@ -40,6 +58,8 @@ public class PlayerHP : MonoBehaviour
 
     public void Heal(int amount)
     {
+        if (isDead) return;
+
         currentHP += amount;
 
         if (currentHP > maxHP)
@@ -51,10 +71,21 @@ public class PlayerHP : MonoBehaviour
         {
             healthBar.SetHealth(currentHP);
         }
+
+        Debug.Log("Heal! HP = " + currentHP);
     }
 
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
+        // ใช้แบบนี้เพื่อให้เสียงระเบิดยังดัง แม้ Player จะถูกปิด
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+        }
+
         if (GameStateManager.instance != null)
         {
             GameStateManager.instance.GameOver(transform.position);

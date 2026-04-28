@@ -18,17 +18,19 @@ public class ShipController : MonoBehaviour
     public Transform firePointR;
     public float fireRate = 0.2f;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+
     private float nextFire;
 
     void Update()
     {
-        // 🚀 เดินหน้า (W)
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
         }
 
-        // 🔄 หมุน (A / D)
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
@@ -39,7 +41,6 @@ public class ShipController : MonoBehaviour
             transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
         }
 
-        // 🔫 ยิง (คลิกซ้าย)
         if (Input.GetMouseButton(0) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
@@ -67,5 +68,10 @@ public class ShipController : MonoBehaviour
 
         Instantiate(bulletPrefab, firePointL.position, firePointL.rotation);
         Instantiate(bulletPrefab, firePointR.position, firePointR.rotation);
+
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 }
